@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+  <main>
+    <section class="container my-5 px-4">
+      <h1 class="text-center"><span style="color:red">Ya</span>Cut</h1>
+      <p class="text-center my-4">
+        Создайте короткую ссылку автоматически или предложите свой вариант
+      </p>
+      <form method="POST" novalidate>
+        {{ form.csrf_token }}
+        <div class="container">
+          <div class="row my-3">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+              <form>
+                <div>
+                  <div>
+                    {{ form.original_link(class="form-control form-control-lg py-3 mb-3", placeholder="Длинная ссылка") }}
+                    <p>
+                      {% if form.original_link.errors %}
+                        {% for error in form.original_link.errors %}
+                          <span style="color: red">{{ error }}</span>
+                        {% endfor %}
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div>
+                    {{ form.custom_id(class="form-control form-control-lg py-3 mb-3", placeholder="Ваш вариант короткой ссылки")}}
+                    <p>
+                      {% if form.custom_id.errors %}
+                        {% for error in form.custom_id.errors %}
+                          <span style="color: red">{{ error }}</span>
+                        {% endfor %}
+                      {% endif %}
+                    </p>
+                  </div>
+                  {{ form.submit(class="btn btn-primary") }}
+                </div>
+              </form>
+            </div>
+            <div class="col-sm"></div>
+          </div>
+        </div>
+      </form>
+        <div class="container">
+          <div class="row ">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+              <p class="text-center">
+              <h5 class="text-center">
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %}
+                      {{ message|safe }}
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+              </h5>
+              </p>
+            </div>
+            <div class="col-sm">
+            </div>
+          </div>
+        </div>
+    </section>
+  </main>
+{% endblock %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
